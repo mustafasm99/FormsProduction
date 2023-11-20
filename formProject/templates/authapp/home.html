@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOin</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+
+<body>
+  <div class="messages-holder">
+    {% if messages  %} 
+      {% for i in messages %}
+        <div class="{%if i.extra_tag%} {{i.extra_tags}} {% endif %}">
+          {{i}}
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+    <div class="loginMenu">
+        <div class="form">
+          <form class="loginForm" method="post">
+            {%csrf_token%}
+            <input type="text" placeholder="username" name="username"/>
+            <input type="password" placeholder="password" name="password"/>
+            <button>LOG In</button>
+          </form>
+        </div>
+      </div>
+</body>
+</html>

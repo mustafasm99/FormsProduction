@@ -1,0 +1,17 @@
+db.sqlite3
+form/
+form/__pycache__
+<<<<<<< HEAD
+student/__pycache__
+DASHBORD/__pycache__
+DASHBORD/migrations/__pycache__
+student/migrations/__pycache__
+form/migrations/__pycache__
+.getignore
+=======
+form/migrations/__pycache__
+student/__pycache__
+student/migrations/__pycache__
+DASHBORD/__pycache__
+DASHBORD/migrations/__pycache__
+>>>>>>> b1039f0fd27434685a33a908515c9766bc18a65b

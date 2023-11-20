@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashbord</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashbord.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kenia&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="flex flex-center center">
+            <H1 class="center flex flex-center dash-title">
+                DASHBORD
+            </H1> 
+        </div>
+        <div class="flex-warp flex-center m-center">
+            <nav class="nav-bar">
+                <ul class="flex flex-center">
+                    <li>
+                        <p>
+                            <a href="#all_forms">All Forms</a>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <a href="#createNew">create new </a>
+                        </p>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="flex-warp flex-center work-space main-container">
+        <div class="flex flex-center">
+            <h3 class="secetion-title">
+                All Forms
+            </h3>
+        </div>
+        <div class="formsHolders grid" id="all_forms">
+            {% for form in forms %}
+                <div class="item" id="item{{form.id}}">
+                    {% if form.logo %}
+                    <img src="{{form.logo.url}}" alt="" class="imageAsBg">
+                    {% endif %}
+                    <h1 class="dash-form-name themp-form-content">
+                        {{form.name}}
+                    </h1>
+                    <div class="flex flex-center m-center themp-form-content">
+                        <button  class="btn btn-info" type="button">
+                            <a href="data/{{form.name}}" class="link">
+                                Data
+                            </a>
+                        </button>
+                        <button class="btn btn-info">
+                            <a href="edit/{{form.name}}" class="link">
+                                Edit
+                            </a>
+                        </button>
+                    </div>
+                </div>
+                <script>
+                    form = document.getElementById("item{{form.id}}").addEventListener('click' , ()=>{
+                        window.location = "data/{{form.name}}"
+                    })
+                </script>
+            {% endfor %}
+        </div>
+        <hr class="line">
+        <form action="" method="POST" enctype="multipart/form-data" id="createNew">
+            {%csrf_token%}
+            <div class="flex flex-center">
+                <div class="dash-input">
+                    <label for="">
+                        select backgroun image 
+                    </label>
+                    <input type="file" name="bgimage">
+                </div>
+        
+                <div>
+                    <label for="">background Color</label>
+                    <input type="color" name="bgcolor">
+                </div>
+            </div>
+
+            <div class="flex flex-center input-group">
+                <div class="dash-Himage">
+                    <h3>
+                        select iamge
+                    </h3>
+                    <input type="file" name="headerImage">
+                </div>
+            </div>
+
+            <div class="flex flex-cneter input-group">
+                <div class="dahs-Himage m-center">
+                    <div class="header">
+                        <input type="color" name="instraction-header">
+                    </div>
+                    <h1 class="center">
+                        <input type="text" placeholder="Name" name="name">
+                    </h1>
+                    <textarea name="text" id="text" cols="70" rows="10" style="resize: none;">
+
+                    </textarea>
+                    <hr class="hr">
+                    <br>
+                    <h3>
+                        <input type="text" name="title" placeholder="Title">
+                    </h3>
+                    <br>
+                    <ol>
+                        <p style="text-align: left;">add points</p>
+                        <li id="instraction-point">
+                            <input type="text" name="point" name="instraction-point">
+                        </li>
+                        <li>
+                            <div class="flex flex-center">
+                                <button class="add-btn" type="button" id="point">
+                                    +
+                                </button>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="flex-warp flex-center input-group m-center center" id = "field">
+                <input type="hidden" name="field" value="true">
+                <div class="header">
+                    <p>select the input header color</p>
+                    <input type="color" name="input-header" >
+                </div>
+                <div style="text-align: center;flex: 100%;">
+                    <p style="text-align: center;">
+                        add field 
+                    </p>
+                </div>
+                <div class=" flex-center" style="flex:1;">
+                    <input type="text" placeholder="question" name="input-question">
+                    <input type="text" placeholder="field name" name="fieldname">
+                    <input type="text" placeholder="answer name" name="answer-name">
+                    <input type="text" placeholder="Answer" name="answer">
+                </div>
+
+                {% comment %} <div class="mcq">
+                    <p>create MCQ for these question </p>
+                    <ol>
+                        <li id="mcqpoint">
+                            <input  type="text" name="mcq-option" placeholder="text">
+                            <button type="button" class="delete-btn" onclick="this.parentElement.remove()">
+                                Delete
+                            </button>
+                        </li>
+                        <li style="text-align: center;">
+                            <button type="button" class="add-btn" id="mcq" onclick="newMcq(this)">+</button>
+                        </li>
+                    </ol>
+                </div> {% endcomment %}
+                <div class="flex" style="flex:100%;justify-content: center;">
+                    <button type="button" class="delete-btn" onclick="this.parentElement.parentElement.remove()">delete</button>
+                </div>
+            </div>
+            <div class="flex flex-centert">
+                <button class="save-btn" type="submit">
+                    Save
+                </button>
+                <button type="button" id="newfieldbutton" class="more-field">
+                    Add more Fields
+                </button>
+            </div>
+        </form>
+    </main>
+    <script src="{% static 'js/dashbord.js' %}"></script>
+</body>
+</html>

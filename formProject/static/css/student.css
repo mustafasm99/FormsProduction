@@ -1,0 +1,251 @@
+:root {
+    --main-color : #200058;
+    --light-purplr : #463770;
+    --blue-color : #074e87;
+    --sky-blue : #00c3ff;
+    --main-gray : #e8e9f5;
+    --green-color : #97d637;
+    --orange : #ff6600;
+    --light-orange : #ff9933;
+    --deep-yellow : #ffcc00;
+    --pink : #f6848e;
+    --light-pink : #ffbac0;
+    --dark-gray : #65656b;
+    --green : #14888B;
+    --advance-color : #BB254B;
+  }
+@font-face {
+    font-family: main-font;
+    src: url("/static/Fonts/Bahij_TheSansArabic-Plain.woff");
+}
+
+*{
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "main-font";
+}
+body,html{
+    background-color:var(--main-color);
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.flex{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+.logo{
+    width: 100px;
+    height:70px;
+}
+.logo img{
+    width:100%;
+    height:100%;
+
+}
+
+.search{
+    margin-top:10px ;
+    margin-bottom: 30px;
+    margin-left:80px ;
+    width:800px ;
+    height: 30px;
+    padding:10px;
+    border-radius:30px;
+    box-shadow: rgba(72, 159, 230, 0.583) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+.center{
+    justify-self:center;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin:0 auto;   
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat( auto-fit,minmax(300px , 1fr) );
+    gap: 10px;
+    margin: 20px 120px;
+}
+.cource{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow:hidden;
+    border-radius:10px;
+    margin:10px 3px;
+    border:solid 1px #65656b;
+    box-shadow: rgba(72, 159, 230, 0.583) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px; 
+    background-color: #e8e9f5;  
+    overflow: hidden; 
+    position: relative;
+    
+}
+.cource_img{
+    display: flex;
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cource_img img{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+}
+.flex-col
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cource:hover 
+{
+    z-index: 9;
+    box-shadow: rgba(202, 202, 202, 0.24) 0px 3px 8px;
+}
+.cource:hover .data-holder
+{
+    top:50%;
+}
+.data-holder
+{
+    background-color: #f2f2f293;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    position: absolute;
+    left: 50%;top: 150%;
+    transform: translate(-50% , -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all ease-out 350ms;
+}
+.data-holder::-webkit-scrollbar
+{
+    background-color: transparent;
+}
+.data-holder::-webkit-scrollbar-thumb
+{
+    background-color: #200058;
+    border-radius: 5px;
+}
+.data-holder h1
+{
+    font-size: 35px;
+    font-weight: 750;
+    margin: 20px auto;
+}
+.data-holder p
+{
+    font: 25px;
+    font-weight: 750;
+    margin: 10px;
+}
+.underline
+{
+    text-decoration: underline;
+}
+.data{
+    background-color: #200058;
+    color: white;
+    border-radius: 5px;
+    width: 80%;
+    margin: 10px auto;
+    transition: all ease-out 350ms;
+    cursor: pointer;
+}
+.data input[type="checkbox"]
+{
+    width: 50px;
+    
+}
+.data:hover
+{
+    background-color: white;
+    color: #200058;
+}
+.btn
+{
+    width: 220px;
+    height: 100px;
+    color: white;
+    font-size: 35px;
+    font-weight: 850;
+    background-color: #ff6600;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.next
+{
+    position: fixed;
+    left: 50%;
+    top:90%;
+    transform: translate(-50% , -50%);
+    display: none;
+}
+@media (max-width:400px)
+{
+    .cource
+    {
+        grid-column: span 1 !important;
+        grid-row:span 1 !important;
+    }
+}
+.all-filters-holder
+{
+    width: fit-content;
+    padding: 5%;
+    overflow-x: scroll;
+    transition: all ease-out .8s;
+    scroll-behavior: smooth;
+}
+.all-filters-holder::-webkit-scrollbar
+{
+    background-color: transparent;
+}
+.all-filters-holder::-webkit-scrollbar-thumb
+{
+    background-color: #e8e9f5;
+    border-radius: 12px;
+}
+.flex-row
+{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.flex-warp
+{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    color: #f2f2f2;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.filter
+{
+    margin: 0 10px;
+    padding: 10px;
+    width: 120px;
+    background-color: #f2f2f2;
+    color: #200058;
+    text-align: center;
+    border-radius: 12px;
+    cursor: pointer;
+
+}
+.filter a 
+{
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static  %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data|{{form.name }}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashbord.css' %}">
+</head>
+<body>
+    <main class="flex-warp flex flex-center main-container">
+        <div class="flex flex-center m-center input-group">
+            <input type="text" placeholder="search" id="dash-search">
+        </div>
+        <table class="dash-table">
+            <thead>
+                <tr>
+                    {% for field in feailds%}
+                        <th>
+                            {{field}}
+                        </th>
+                    {% endfor %}
+                    <th>Create Time</th>
+                    <th>Add Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                    <tr>
+                        {% for j in i.get_all_values|slice:"1:" %}
+                            <td>{{j.value}}</td>
+                        {% endfor %}
+                        <td> {{i.add_time}}</td>
+                        <td>{{i.update}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <script src="{% static 'js/data.js' %}"></script>
+</body>
+</html>

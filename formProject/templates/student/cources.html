@@ -1,0 +1,64 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/student.css'%}">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+</head>
+<body>
+    <div class="home_page">
+        <div class="flex center" style="position: relative;">
+            <div class="logo flex"><img src="{%static '/img/full-logo-light.png.png'%}" alt=""></div>
+            <input type="text" id="search" class="search" placeholder="search"> 
+        </div>
+        <div class="nav flex-warp">
+            {%for i in data %}
+            <div class="filter">
+                <a href="#{{i}}" data-target="grid-{{i.id}}">
+                    {{i}}
+                </a>
+            </div>
+            {%endfor%}
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="flex-row all-filters-holder" id="filters-holder">
+            {%for Teacher in data%}
+                <div class="container center" id="grid-{{Teacher.id}}">
+                    {%for i in Teacher.get_all_courses%}
+                    <div class="cource" style="grid-row:span {{i.row}}; grid-column:span {{i.col}}">
+                        <div class="cource_img">
+                            <img src="{{i.image.url}}" alt="">
+                        </div>
+                        <div class="flex-col flex-center m-centert data-holder">
+                            <h1>
+                                {{i.name}}
+                            </h1>
+                            <p class="underline">جميع الكورسات ادناه </p>
+                            {%for j in i.get_all_cources%}
+                            <div class="data">
+                                <div class="flex">
+                                    <input type="checkbox" name="course" id="" value="{{j.id}}">
+                                    <p>
+                                        {{j}}
+                                    </p>
+                                </div>
+                            </div>
+                            {%endfor%}
+                        </div>
+                    </div>
+                    {%endfor%} 
+                </div>
+                {%endfor%}
+            </div>
+            <button class="next btn btn-next" id="next">
+                احجز 
+            </button>
+        </form>
+
+            <script src="{% static "js/cources.js" %}"></script>
+        </div>
+    </body>
+    </html>

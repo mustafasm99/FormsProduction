@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit | {{form.name}}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashbord.css' %}">
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+    
+    <main class="dash-container">
+        <section class="feaildsholder">
+            <div class="dash-logo">
+                {% if form.logo %}
+                    <img src="{{form.logo.url}}" alt="">
+                    <input type="file" name="logo" id="" value="{{form.logo.url}}">
+                {%else%}
+                <input type="file" name="logo" id="" value="">
+                {% endif %}
+            </div>
+            <div class="grid sub-tools">
+                <div class="item">
+                    <a href="{%url 'DASHBORD:showform' form.name%}" class="center-input-item">
+                        show the form
+                    </a>
+                </div>
+                <div class="item">
+                    <input type="color" value="{{form.color}}" name="form-color">
+                    <p class="center-input-item">form Back Ground Color </p>
+                </div>
+                <div class="item">
+                    <input type="checkbox" name="next" id="" {%if form.next_step%} checked {%endif%}>
+                    <p class="center-input-item">Next Page</p>
+                </div>
+                {%if form.image %}
+                <div class="item">
+                    <img src="{{form.image.url}}" alt="">
+                    <input type="file" name="form-image" id="" class="center-input-item">
+                </div>
+                {%else%}
+                <div class="item">
+                    <input type="file" name="form-image" id="" class="center-input-item">
+                </div>
+                {%endif%}
+            </div>
+            <div class="flex-col flex-center m-center input-group">
+                <div class="flex flex-center">
+                    <h3>
+                        all the feild with : {{form.name}}
+                    </h3>
+                </div>
+                <div class="main-container flex">
+                    <div>
+                        {% for i in form.get_all_fiald_with_connection %}
+                        <div class="flex dash-feild sp">
+                            <h3>{{i}}</h3>
+                            <form action="" method="post">
+                                {%csrf_token%}
+                                <button class="btn btn-error" type="submit" name="delete" value="{{i.id}}">Delete</button>
+                            </form>
+                        </div>
+                        {%endfor%}
+                    </div>
+                    <div class="" style="flex:1;">
+                        <div>
+                            <label for="color">Select the color for the input header</label>
+                            <input type="color" name="headercolor" >
+                        </div>
+                        <label for="color">Create new feaild</label>
+                        <input type="text" name="feaild-name" placeholder="feaild name">
+                        <input type="text" name="answer-name" placeholder="answer name">
+                        <p>video</p> <input type="file" name="vide" id="">
+                        <p>
+                            when you will select one of these options it will make the new feaild as connections feaild 
+                        </p>
+                        <select name="connections" id="">
+                            <option value="none">select question </option>
+                            {%for i in form.get_all_fiald %}
+                            <option value="{{i.id}}">{{i}}</option>
+                            {%endfor%}
+                        </select>
+                        <div class="flex flex-center sp flex-center flex-warp"  style="flex:0.3">
+                            <div class="input-group">
+                                <label for="checkbox">is it MCQ</label>
+                                <input type="checkbox" name="is-mcq" id="">
+                            </div>
+                            <div class="flex flex-center flex-warp" >
+                                <input type="text" name="mcq-point" id="MCQ" placeholder="mcq point" style="width: 75%;">
+                            </div>
+                            <button type="button" onclick="addCopy(document.getElementById('MCQ'))" class="add-btn" style="width: 20px ;height:20px;font-size: 10px;">+</button>
+                        </div>
+                        <button class="btn btn-info" type="submit">
+                            save
+                        </button>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+    </main>
+</form>
+    <script src="{% static 'js/dashbord.js' %}"></script>
+</body>
+</html>

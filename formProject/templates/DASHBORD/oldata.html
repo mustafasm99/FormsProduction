@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>{{form.name}}</title>
+</head>
+{% if form.image %}
+    <body style="background-image:url('{{form.image.url}}')">
+    {% else %}
+    <body style="background-color: {{form.color}}; color:{{form.textColor}};width:100%;">
+{% endif %}
+        {% if data.edited %}
+        <div class="m-cetner main-container">
+            {% if form.logo %}
+            <div class="main-logo">
+                <img src="{{form.logo.url}}" class="img-fluid rounded-top" alt="">
+            </div>
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+    
+            {% if form.get_instrction %}
+                <div class="input-group flex-col flex-center">
+                    <h2>{{form.get_instrction.Name}}</h2>
+                    <br>
+                    {% if form.get_instrction.Text %}
+                        <p>
+                            {{form.get_instrction.Text}}
+                        </p>
+                        <hr style="width: 100%;">
+                    {% endif %}
+                    <h4>{{form.get_instrction.Title}}</h4>
+                    <ol>
+                        {% for i in form.get_instrction.get_all_points %}
+                            <li>
+                                {{i}}
+                            </li>
+                        {% endfor %}
+    
+                    </ol>
+                </div>    
+            {% endif %}
+    
+        {% for input in form.get_all_fiald %}
+            
+            {% if input.answer.text %}
+    
+               
+                <div class="input-group flex flex-center">
+                    <div>
+                        
+                        <label for ="{{input.name}}">
+                            {{input}}
+                        </label>
+                        <input class="" type="text" name="{{input.question}}" id="{{input.name}}" value="{{fields.forloop.counter}}">
+                    </div>
+                    {% if input.connection %}
+                        {% for i in input.connection.all %}
+                            <div>
+                                <label for="{{i.name}}">
+                                    {{i}}
+                                </label>
+                            <input type="text" name="{{i.question}}" id="{{i.name}}" required>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            {% elif input.answer.msq %}
+            
+            <div class="input-group" style="justify-content: flex-start;">
+                    <h3>{{input.question}}</h3>
+                    <!-- {% if input.video %}
+                        <p class="error">
+                            لايمكنك الاجابه قبل مشاهدة الفديو
+                        </p>
+                        <div class="video">
+                            <video src="{{input.video.url}}" controls>
+                                
+                            </video>
+                        </div>
+                    {% endif %} -->
+                    <div class="flex" style="justify-content:flex-end;">
+                        <div class="mcq">
+                            {% for i in input.answer.get_all_Mcq %}
+                                <div >
+                                    <p for="">{{i}}</p>
+                                    <input type="radio" name="{{input.answer.name}}" value="{{i}}" required>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}    
+            <div class="flex">
+                <button class="m-center" type="submit" style="background-color: #ff6600;">
+                    تسجيل 
+                </button>
+            </div>
+        </form>
+        </div>
+        {% else %}
+        <div class="thank flex-col felx-center main-container">
+            <div class="input-group">
+                <h2>شكرا لملئ الاستماره </h2>
+            <p>
+                لايمكنك اعادة الملئ بلفتره الحاليه 
+            </p>
+            <p>
+                سنتواصل معك قريبا 
+            </p>
+            <p>
+                <!-- <a href="">
+
+                </a> -->
+            </p>
+            </div>
+        </div>
+        {% endif %}
+    
+    <script src="{% static 'js/main.js' %}" ></script>
+</body>
+</html>
